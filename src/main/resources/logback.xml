@@ -1,0 +1,19 @@
+<configuration>
+    <!--Настройка места и формата вывода логов-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--Настройка уровней логирования для ключевых пакетов-->
+    <logger name="org.hibernate.SQL" level="DEBUG" />
+    <logger name="org.hibernate.orm.jdbc.bind" level="TRACE" /> <!--Параметры запросов-->
+    <logger name="org.hibernate.tool.hbm2ddl" level="DEBUG" />
+    <logger name="com.example" level="DEBUG" />
+
+    <!--Настройка логирования по умолчанию для остального кода-->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
