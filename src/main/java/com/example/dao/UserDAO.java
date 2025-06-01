@@ -1,9 +1,7 @@
 package com.example.dao;
 
 import com.example.util.TransactionUtil;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import java.util.List;
 
 import com.example.domain.User;
@@ -43,5 +41,9 @@ public class UserDAO {
             session.remove(user);
             return null;
         });
+    }
+
+    public TransactionUtil getTxUtil() {
+        return txUtil;
     }
 }

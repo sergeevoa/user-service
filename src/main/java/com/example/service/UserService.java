@@ -25,27 +25,27 @@ public class UserService {
         return dao.getAll();
     }
 
-    public void update(Long id, String newName, String newEmail, Integer newAge) {
+    public User update(Long id, String newName, String newEmail, Integer newAge) {
         User user = get(id);
-        if (user == null) {
-            throw new IllegalArgumentException("User with id " + id + "is not found");
+        if (user != null) {
+            if (newName != null && !newName.isBlank()) {
+                user.setName(newName);
+            }
+            if (newEmail != null && !newEmail.isBlank()) {
+                user.setEmail(newEmail);
+            }
+            if (newAge != null) {
+                user.setAge(newAge);
+            }
+            dao.update(user);
         }
-        if (newName != null && !newName.isBlank()) {
-            user.setName(newName);
-        }
-        if (newEmail != null && !newEmail.isBlank()) {
-            user.setEmail(newEmail);
-        }
-        if (newAge != null) {
-            user.setAge(newAge);
-        }
-
-        dao.update(user);
+        return user;
     }
 
-    public void delete(Long id) {
+    public User delete(Long id) {
         User user = get(id);
-        dao.delete(user);
+        if (user != null)
+            dao.delete(user);
+        return user;
     }
-
 }

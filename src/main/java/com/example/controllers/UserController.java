@@ -53,32 +53,38 @@ public class UserController {
     }
 
     public void update() {
-        User user = getUser();
-        if (user != null) {
-            System.out.println("Update rules: enter new value to the line to update field, leave the line blank to keep " +
+        System.out.println("Enter user id:");
+        Long id = readLong();
+        System.out.println("Update rules: enter new value to the line to update field, leave the line blank to keep " +
                     "it's old value.");
-            System.out.println("Enter new name:");
-            String newName = sc.nextLine();
-            newName = newName.isBlank() ? null : newName;
-            System.out.println("Enter new email:");
-            String newEmail = sc.nextLine();
-            newEmail = newEmail.isBlank() ? null : newEmail;
-            System.out.println("Enter new age:");
-            String ageLine = sc.nextLine();
-            Integer newAge = ageLine.isBlank() ? null: Integer.valueOf(ageLine);
-            service.update(user.getId(), newName, newEmail, newAge);
-        } else {
+        System.out.println("Enter new name:");
+        String newName = sc.nextLine();
+        newName = newName.isBlank() ? null : newName;
+        System.out.println("Enter new email:");
+        String newEmail = sc.nextLine();
+        newEmail = newEmail.isBlank() ? null : newEmail;
+        System.out.println("Enter new age:");
+        String ageLine = sc.nextLine();
+        Integer newAge = ageLine.isBlank() ? null: Integer.valueOf(ageLine);
+        User updatedUser = service.update(id, newName, newEmail, newAge);
+        if (updatedUser == null)
             System.out.println("User is not found");
+        else {
+            System.out.println("User updated successfully!");
+            updatedUser.print();
         }
-
     }
 
     public void delete() {
-        User user = getUser();
-        if (user != null)
-            service.delete(getUser().getId());
-        else
+        System.out.println("Enter user id:");
+        Long id = readLong();
+        User deletedUser = service.delete(id);
+        if (deletedUser == null)
             System.out.println("User is not found");
+        else {
+            System.out.println("User deleted successfully!");
+            deletedUser.print();
+        }
     }
 
     public Integer readInt() {
